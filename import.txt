@@ -1,0 +1,27 @@
+1.工具使用起来也不难，只需要先在Maven插件配置文件中引入依赖
+
+<dependency>
+    <groupId>cn.smallbun.screw</groupId>
+    <artifactId>screw-core</artifactId>
+    <version>${lastVersion}</version>
+ </dependency>
+2.然后再导入主方法类，将其中的数据库连接部分及导出部分修改成自己需要的内容，再运行程序就可以了。
+
+  //数据库的配置，改成你自己的数据库连接
+   hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+   hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/database");
+   hikariConfig.setUsername("root");
+   hikariConfig.setPassword("password");
+   
+    //生成文件的配置，看你要生在哪里生成什么格式
+   EngineConfig engineConfig = EngineConfig.builder()
+         //生成文件的路径
+         .fileOutputDir(fileOutputDir)
+         //打开目录
+         .openOutputDir(true)
+         //文件类型
+         .fileType(EngineFileType.HTML)
+         //生成模板实现
+         .produceType(EngineTemplateType.freemarker)
+         //自定义文件名称
+         .fileName("自定义文件名称").build();
